@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Leaflet.DistortableImage Example</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0 maximum-scale=1.0, user-scalable=no" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" crossorigin="" />
+  <link rel="stylesheet" href="/js/leaflet.distortableimage.css" media="screen" title="no title">
+  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" crossorigin=""></script>
+
+  <link rel="stylesheet" href="https://publiclab.github.io/Leaflet.DistortableImage/dist/vendor.css">
+  <link rel="stylesheet" href="https://publiclab.github.io/Leaflet.DistortableImage/dist/leaflet.distortableimage.css"
+    media="screen" title="no title">
+  <script src="https://publiclab.github.io/Leaflet.DistortableImage/dist/vendor.js"></script>
+  <script src="/js/leaflet.distortableimage.js"></script>
+
+
+</head>
+
+<body style="margin:0;">
+
+  <form id="test_form">
+    <input type="file" class="ldi" id="inputimage" accept="image/*">
+  </form>
+
+  <div id="map" style="width:100%; height:100%; position:absolute; top:0;"></div>
+</body>
+<script>
+
+  // set the initial map center and zoom level
+  map = L.map('map').setView([40.66386852588303, -73.72293956121996], 20);
+
+
+  const tiles = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+    maxZoom: 20,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+  }).addTo(map);
+
+
+
+  map.whenReady(function () {
+    // By default, 'img' will be placed centered on the map view specified above
+
+
+    img = L.distortableImageOverlay('parking-lot.png', {
+      mode: 'freeRotate',
+      actions: [L.RotateAction, L.FreeRotateAction, L.ScaleAction, L.OpacityAction, L.DeleteAction],
+    }).addTo(map);
+
+  });
+
+</script>
+
+</html>
